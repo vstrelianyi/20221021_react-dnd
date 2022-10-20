@@ -8,7 +8,21 @@ import { DragDropContext } from 'react-beautiful-dnd';
 const App = () => {
 	const [ data, setData ] = useState( initialData );
 
+	// const handleDragStart = () => {
+	// 	document.body.style.color='orange';
+	// 	document.body.style.transition = 'background-color 0.2s ease';
+	// }
+
+	// const handleDragUpdate = update => {
+  //   const { destination } = update;
+  //   const opacity = destination
+  //     ? destination.index / Object.keys(data.tasks).length
+  //     : 0;
+  //   document.body.style.backgroundColor = `rgba( 153, 141, 217, ${opacity})`;
+  // };
+
 	const handleDragEnd = result => {
+		document.body.style.color='inherit';
 		const { destination, source, draggableId } = result;
 		if( !destination ) return;
 		if (
@@ -40,7 +54,10 @@ const App = () => {
 	}
 
 	return(
-		<DragDropContext onDragEnd={ handleDragEnd }
+		<DragDropContext
+			onDragEnd ={ handleDragEnd }
+			// onDragStart = { handleDragStart }
+			// onDragUpdate = { handleDragUpdate }
 		>
 			{ data.columnOrder.map( columnId => {
 				const column = data.columns[columnId ];
